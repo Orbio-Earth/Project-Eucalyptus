@@ -101,7 +101,7 @@ For each target scene, our model uses the two last cloud/cloud shadow free image
 
 The larger the crop of the whole satellite image we use as a target scene, the harder it is to find perfect, low cloud reference scenes as parts of the image may be cloudy and other parts are clear. Hence, choosing crop sizes not larger than e.g. 500x500 px is advised to be able to find clear view reference scenes close in time. We use 128x128 px crops during training and 500x500 px crops in production.
 
-The whole synthetic data generation pipeline can be inspected [here](https://github.com/Orbio-Earth/Orbio/blob/main/methane-cv/src/data/generate.py).
+The whole synthetic data generation pipeline can be inspected [here](https://github.com/Orbio-Earth/Eucalyptus-code-archive/blob/main/methane-cv/src/data/generate.py).
 
 ### Why are the training labels not just the methane concentration?
 
@@ -121,7 +121,7 @@ The distribution over world regions should be selected according to where the mo
 
 As we want the model to be able to deal with all kinds of conditions, clouds and no data, we did not restrict the initial querying for IDs in any significant way. Only after an ID is sampled with X% obscured pixels (e.g. 80% where 50% are no data and another 30% clouds), we sample another ID with probability X% with a maximum of 40% no data and 40% cloud cover (in the valid pixels). This is done to ensure that we have valid, non-obscured pixels from all sampled areas.
 
-This whole process can be inspected within [this notebook](https://github.com/Orbio-Earth/Orbio/blob/main/methane-cv/notebooks/S2-2025-02-14-Tile_and_ID_Selection.ipynb).
+This whole process can be inspected within [this notebook](https://github.com/Orbio-Earth/Eucalyptus-code-archive/blob/main/methane-cv/notebooks/S2-2025-02-14-Tile_and_ID_Selection.ipynb).
 
 ### How was the validation dataset created?
 The validation data was selected to come from three important and very different regions in terms of vegetation and biome classification: Hassi (Algeria, desert), Permian (Texas, New Mexico, arid to semi-arid) and Marcellus (North East of the USA, temperate forests). See [here](Validation.md#why-have-you-selected-these-three-specific-regions-to-validate-in) for more details on the choice of these regions.
@@ -130,7 +130,7 @@ We sampled much more (around 8\) Sentinel 2 IDs for each of the 66 MGRS tiles co
 
 The resulting validation set has 33 MGRS tiles (9 from the region around Hassi, 13 from Marcellus and 11 from Permian) and  248 Sentinel 2 IDs from 2016-2022.
 
-This whole process can be inspected within [this notebook](https://github.com/Orbio-Earth/Orbio/blob/main/methane-cv/notebooks/S2-2025-02-14-Tile_and_ID_Selection.ipynb).
+This whole process can be inspected within [this notebook](https://github.com/Orbio-Earth/Eucalyptus-code-archive/blob/main/methane-cv/notebooks/S2-2025-02-14-Tile_and_ID_Selection.ipynb).
 
 ### Have you tried using a larger training dataset?
 

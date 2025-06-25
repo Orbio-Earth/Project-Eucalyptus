@@ -77,7 +77,7 @@ We saw a large improvement going from an U-Net (Ronneberger et al. 2015\) with a
 
 ### How do you train the model?
 
-The training loop (code [here](https://github.com/Orbio-Earth/Orbio/blob/main/methane-cv/src/training/training_script.py)) is fairly standard with some special design decisions.
+The training loop (code [here](https://github.com/Orbio-Earth/Eucalyptus-code-archive/blob/main/methane-cv/src/training/training_script.py)) is fairly standard with some special design decisions.
 
 We typically trained with 4 GPUs using distributed training on Azure ML. We use the optimizer AdamW with no weight decay and a batch size schedule (Smith et al. 2017), where the batch size is gradually increased over the first 30 warmup epochs from 16 to 160\.
 
