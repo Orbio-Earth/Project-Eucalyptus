@@ -26,7 +26,7 @@ All components are released under a non‑commercial licence, see here. Commerci
 
 **Planet‑scale impact.** The climate clock is loud. Opening our stack is the fastest way to build trust, accelerate improvements to models and multiply our impact.
 
-### Who are you?
+### Who is Orbio?
 
 [Orbio Earth](https://orbio.earth) is a climate-tech company founded in 2021 to turn open satellite data into actionable methane intelligence.
 
