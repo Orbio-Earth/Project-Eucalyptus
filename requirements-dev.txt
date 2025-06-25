@@ -1,0 +1,4 @@
+lxml==5.4.0
+mkdocs==1.6.1
+pymdown-extensions==10.15
+ruff==0.11.13

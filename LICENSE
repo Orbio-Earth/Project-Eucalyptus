@@ -1,0 +1,110 @@
+
+Project Eucalyptus – Licence (Code, Models, Data)
+=================================
+
+Copyright © 2025 Orbio Earth GmbH  
+All rights reserved.
+
+---
+
+## License Summary
+
+Project Eucalyptus is made available under the terms of:
+
+- **Code and source files**: [Polyform Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)
+- **Model weights and synthetic datasets**: Also governed under the **same license terms**, to keep usage rules consistent.
+
+This means:
+
+- You **can** use, modify, and share this material **for non-commercial purposes**.
+- You **cannot** use it for any **commercial purpose** without explicit permission.
+
+Examples of **non-commercial use**:
+- Academic research
+- Personal experimentation
+- Public interest analysis without revenue or commercial service
+
+Examples of **commercial use** (not allowed under this license):
+- Selling derived models or tools
+- Integrating this work into a paid SaaS platform
+- Using it in commercial environmental consultancy projects
+
+For commercial licensing, please contact: **info@orbio.earth**
+
+---
+
+## Attribution Requirement
+
+If you use this code, model weights, or datasets in any publication, presentation, or derivative work, you **must** include a citation or acknowledgment such as:
+
+> "This work uses components from *Project Eucalyptus*, released by Orbio Earth"
+
+This helps ensure credit is given to the contributors and originators of the tools and data.
+
+---
+
+## Patent Notice
+
+Certain methods implemented in this repository are the subject of **pending patent applications**.  
+**No patent license is granted for commercial use** under this open license.  
+Commercial users must obtain a separate license.
+
+For inquiries: **info@orbio.earth**
+
+---
+
+## Full License Text
+
+The following applies to **all contents** of this repository:
+
+> Licensed under the [Polyform Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)
+>
+> You may use, copy, modify, and share the software for any noncommercial purpose, subject to the terms of the license.
+>
+> You may not use the software for commercial purposes without obtaining a commercial license from Orbio Earth GmbH.
+>
+> THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+---
+
+## Versioning Note
+
+This project reserves the right to dual-license under commercial terms in the future or provide separate terms for specific files. For the avoidance of doubt, **this unified license applies to all folders unless explicitly marked otherwise.**
+
+---
+
+## Questions?
+
+Email: **info@orbio.earth**  
+License information: https://polyformproject.org/licenses/noncommercial/1.0.0/
+
+
+====================================
+
+This project contains data from NASA's Earth Science Data and Information System.
+These data have been modified by cropping them to a smaller spatial extent.
+Unless the content is marked with a use restriction or license, data provided from a NASA-led mission are licensed as Creative Commons Zero (CC0).
+Full data use guidance is available at https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance.
+
+
+### Atmospheric Data Attribution
+
+This project uses atmospheric data provided via the HAPI (Heliophysics Application Programming Interface) protocol.
+
+The HAPI protocol and associated data services are developed and maintained by the NASA Heliophysics Data Environment Enhancements (HDEE) program.
+
+Data accessed via HAPI are the property of the original data providers and are subject to their respective terms and conditions. Users should consult the data source documentation for specific citation requirements.
+
+Example data citation:
+"Data obtained via the HAPI protocol from [Instrument/Provider], accessed on [Date], courtesy of [Agency/Institute Name]."
+
+
+### Sentinel-2 Imagery Attribution
+
+This project includes Sentinel-2 satellite imagery provided by the Copernicus Programme and the European Space Agency (ESA).
+
+These data are made available under the Copernicus Open Access Data Policy, which permits free and open reuse, including for commercial purposes, subject to proper attribution.
+
+Copernicus data © European Union, ESA, and the respective data providers.
+
+More information is available at: https://copernicus.eu/en/legal-notice

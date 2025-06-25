@@ -1,0 +1,54 @@
+site_name: Project Eucalyptus 🌿
+
+docs_dir: docs
+
+use_directory_urls: false
+
+# Theming
+theme:
+features:
+  - navigation.indexes
+
+#   name: material
+#   logo: assets/logo.png
+#   favicon: assets/logo.png
+#   font:
+#     text: Source Sans Pro
+#     code: Fira Mono
+#   palette:
+#     - media: "(prefers-color-scheme: light)"
+#       scheme: default
+#       primary: teal
+#       accent: deep purple
+#       toggle:
+#         icon: octicons/moon-24
+#         name: Dark Mode
+#
+#     - media: "(prefers-color-scheme: dark)"
+#       scheme: slate
+#       primary: teal
+#       accent: deep purple
+#       toggle:
+#         icon: octicons/sun-24
+#         name: Light Mode
+
+# Navigation
+nav:
+  - Introduction: index.md
+  - Data: Data.md
+  - Radiative transfer: Radiative_Transfer.md
+  - Model: Model.md
+  - Validation: Validation.md
+  - Postprocessing: Postprocessing.md
+  - Landsat: Landsat.md
+  - Hyperspectral: Hyperspectral.md
+
+# Markdown Extensions
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+#   - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
