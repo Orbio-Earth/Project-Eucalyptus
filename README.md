@@ -38,6 +38,7 @@ jupyter lab
 
 
 # Contributing & Questions
+
 Want to report a bug, suggest a feature, or contribute code?
 Open an [issue](https://github.com/Orbio-Earth/Project-Eucalyptus/issues) or a [pull request](https://github.com/Orbio-Earth/Project-Eucalyptus/pulls).
 For changes, please:
