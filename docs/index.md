@@ -4,7 +4,7 @@
 Methane monitoring has reached an inflection point. Multispectral and hyperspectral satellites now revisit every major production basin multiple times per week, delivering raw data with the spatial and spectral resolution to resolve individual methane emission plumes. Translating that stream of pixels into *quantified emission detections,* still demands a complex tool‑chain and deep domain knowledge across  satellite data process*ing,* advanced machine learning, radiative transfer physics, synthetic‑data generation and many more. The industry has got to a point where different providers of data will deliver different outputs (detections, quantifications, etc) when processing the exact same raw satellite imagery. The siloed nature of development in the industry is creating confusion and in some cases distrust amongst those who would benefit most from high quality emissions data.
 
 **Project Eucalyptus is an attempt to close that gap.**
-We are publishing a comprehensive tutorial to how Orbio has built its end-to-end methane pipelines over the last couple of years. Next to an extensive Q\&A-like documentation, we are sharing large amounts of Orbio Earth’s production‑grade methane‑analytics pipeline—models, tooling, validation notebooks and reference datasets—released as open source under a non‑commercial licence. We are placing on the public square the same tools we use every day to alert producers when a thief hatch is left open or a flare goes out. No screenshots, no “request a demo”—actual weight files, notebooks and reproducible experiments.
+We are publishing a comprehensive tutorial to how Orbio has built its end-to-end methane pipelines over the last couple of years. Next to an extensive Q&A-like documentation, we are sharing large amounts of Orbio Earth’s production‑grade methane‑analytics pipeline—models, tooling, validation notebooks and reference datasets—released as open source under a non‑commercial licence. We are placing on the public square the same tools we use every day to alert producers when a thief hatch is left open or a flare goes out. No screenshots, no “request a demo”—actual weight files, notebooks and reproducible experiments.
 
 ### What is this doc?
 
@@ -14,7 +14,7 @@ A Q&A-like tutorial covering a wide range of lessons learned across training dat
 * **End‑to‑end notebooks & scripts** covering inference, post‑processing, and objective detection‑threshold evaluation.
 * **Synthetic‑plume toolkit** that injects physically realistic methane signatures into clean scenes for training and stress‑testing.
 
-All components are released under a non‑commercial licence, see here. Commercial users: talk to us—there’s plenty we can build together. Contact: info@orbio.earth
+All components are released under a non‑commercial licence, see [here](https://github.com/Orbio-Earth/Project-Eucalyptus/blob/main/LICENSE). Commercial users: talk to us—there’s plenty we can build together. Contact: info@orbio.earth
 
 ### Why are we publishing this?
 
