@@ -38,5 +38,4 @@ jupyter lab
 
 # How to contribute or ask questions 
 
-Please use Github Issues if you want to contribute or ask questions. 
 We are open to contributions for which we request you to either create a PR or discuss it within a Github Issue.
