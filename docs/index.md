@@ -30,4 +30,4 @@ All components are released under a non‑commercial licence, see here. Commerci
 
 [Orbio Earth](https://orbio.earth) is a climate-tech company founded in 2021 to turn open satellite data into actionable methane intelligence.
 
-Project Eucalyptus is authored by the Orbio Earth team—Robert Huppertz, Maxime Rischard, Timothy Davis, Zani Fooy, Mahrukh Niazi, Philip Popien, Robert Edwards, Vikram Singh, Jack Angela, Thomas Edwards, Maria Navarette, Diehl Sillers and Wojciech Adamczyk — with support from external collaborators.
+Project Eucalyptus is authored by the Orbio Earth team—Maxime Rischard, Timothy Davis, Zani Fooy, Mahrukh Niazi, Philip Popien, Robert Edwards, Vikram Singh, Jack Angela, Thomas Edwards, Maria Navarette, Diehl Sillers, Wojciech Adamczyk and Robert Huppertz— with support from external collaborators.

@@ -9,7 +9,7 @@ This repository contains
 # Who is Orbio?
 [Orbio Earth](https://www.orbio.earth/) is a climate-tech company founded in 2021 to turn open satellite data into actionable methane intelligence.
 
-Project Eucalyptus is authored by the Orbio Earth team—Robert Huppertz, Maxime Rischard, Timothy Davis, Zani Fooy, Mahrukh Niazi, Philip Popien, Robert Edwards,, Vikram Singh, Jack Angela, Thomas Edwards, Maria Navarette, Diehl Sillers and Wojciech Adamczyk — with support from external collaborators.
+Project Eucalyptus is authored by the Orbio Earth team—Maxime Rischard, Timothy Davis, Zani Fooy, Mahrukh Niazi, Philip Popien, Robert Edwards,, Vikram Singh, Jack Angela, Thomas Edwards, Maria Navarette, Diehl Sillers, Wojciech Adamczyk and Robert Huppertz — with support from external collaborators.
 
 # What can I find where?
 - [Detection and Quantification on Sentinel-2](notebooks/sentinel2.ipynb)
@@ -35,3 +35,7 @@ Notebooks can be accessed through jupyter lab, included as a dependency, or thro
 ```
 jupyter lab
 ```
+
+# How to contribute or ask questions 
+
+We are open to contributions for which we request you to either create a PR or discuss it within a Github Issue.
