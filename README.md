@@ -6,7 +6,7 @@ This repository contains
 - Synthetic‑plume toolkit that injects physically realistic methane signatures into clean scenes for training and stress‑testing.
 
 
-# Who are you?
+# Who is Orbio?
 [Orbio Earth](https://www.orbio.earth/) is a climate-tech company founded in 2021 to turn open satellite data into actionable methane intelligence.
 
 Project Eucalyptus is authored by the Orbio Earth team—Robert Huppertz, Maxime Rischard, Timothy Davis, Zani Fooy, Mahrukh Niazi, Philip Popien, Robert Edwards,, Vikram Singh, Jack Angela, Thomas Edwards, Maria Navarette, Diehl Sillers and Wojciech Adamczyk — with support from external collaborators.
