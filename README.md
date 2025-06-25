@@ -36,6 +36,14 @@ Notebooks can be accessed through jupyter lab, included as a dependency, or thro
 jupyter lab
 ```
 
-# How to contribute or ask questions 
 
-We are open to contributions for which we request you to either create a PR or discuss it within a Github Issue.
+# Contributing & Questions
+
+Want to report a bug, suggest a feature, or contribute code?
+Open an [issue](https://github.com/Orbio-Earth/Project-Eucalyptus/issues) or a [pull request](https://github.com/Orbio-Earth/Project-Eucalyptus/pulls).
+For changes, please:
+- Keep PRs focused and well-documented
+- Follow the existing code style
+- Include tests where relevant
+All contributions are accepted under the project’s non-commercial licence.
+Commercial users: see [LICENSE](https://github.com/Orbio-Earth/Project-Eucalyptus/blob/main/LICENSE) or contact info@orbio.earth.
