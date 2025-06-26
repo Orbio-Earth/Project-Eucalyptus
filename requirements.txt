@@ -10,7 +10,7 @@ pydantic==2.10.6
 pyproj==3.6.1
 rasterio==1.3.10
 scikit-image==0.25.1
-scipy==1.10.1
+scipy>=1.11.2
 segmentation_models_pytorch==0.4.0
 shapely==2.0.4
 torch==2.7.1
