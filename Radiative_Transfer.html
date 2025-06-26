@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Radiative transfer - Project Eucalyptus 🌿</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Project Eucalyptus 🌿</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link">Introduction</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Data.html" class="nav-link">Data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Radiative_Transfer.html" class="nav-link active" aria-current="page">Radiative transfer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Model.html" class="nav-link">Model</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Validation.html" class="nav-link">Validation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Postprocessing.html" class="nav-link">Postprocessing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Landsat.html" class="nav-link">Landsat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Hyperspectral.html" class="nav-link">Hyperspectral</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="Data.html" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="Model.html" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/Orbio-Earth/Project-Eucalyptus" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#radiative-transfer" class="nav-link">Radiative Transfer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="radiative-transfer">Radiative Transfer</h1>
+<h3 id="what-is-the-model-of-radiative-transfer-that-you-use">What is the model of radiative transfer that you use?</h3>
+<p>Initially at Orbio we relied on a conventional multilayer radiative-transfer solver. Although such models are physically exact, running it for tens of millions of pixels needed in our synthetic-data pipeline became a hurdle. We therefore built a single-pass radiative transfer approximation that: (a) preserves the physics that matters for methane retrieval, (b) drops or simplifies the terms that are expensive to compute, but have negligible impact on retrieval accuracy. Due to the modular nature of the model, we can drop approximations one by one, trading off the speed for the accuracy of the model.</p>
+<h3 id="how-do-we-model-the-top-of-atmosphere-toa-signal">How do we model the Top of Atmosphere (TOA) signal?</h3>
+<p>In our model, similarly to other models we consider the TOA signal coming from the sunlight doubly passing through the atmosphere and reflecting off the surface of the earth. This can be modelled by considering the intensity recorded at the TOA, at the wavelength <span class="arithmatex">\(\lambda\)</span></p>
+<div class="arithmatex">\[
+I_\lambda^{\text{TOA}}
+      = I_\lambda^{\text{sun}}\,
+        r_\lambda\,
+        \alpha_\lambda\,
+        \exp\!\Bigl[-\!\int_0^{\infty} k_\lambda(s')\,ds'\Bigr].
+\]</div>
+<p>, where
+- <span class="arithmatex">\(I_\lambda^{\text{sun}}\)</span> - solar irradiance (Clough et al., 2005).
+- <span class="arithmatex">\(r_\lambda\)</span> – aerosol scattering factor (slowly varying with wavelength).
+- <span class="arithmatex">\(\alpha_\lambda\)</span> – surface bidirectional reflectance (albedo).
+- <span class="arithmatex">\(k_\lambda\)</span> – aggregate volume-absorption coefficient of all gases.</p>
+<p>A multispectral detector does not see the monochromatic spectrum; each band <span class="arithmatex">\(b\)</span> integrates the intensity through its spectral response function <span class="arithmatex">\(f_\lambda^{b}\)</span>:</p>
+<p>$$
+I^{b}=\int f_\lambda^{b}\,I_\lambda^{\text{TOA}}\;d\lambda .
+$$
+It is worth noting here that predicting the exact TOA radiance is nearly an impossible task. Surface spectrum, aerosol load, and vertical gas profiles are poorly known on a per-pixel basis. Therefore we focus instead on a differential observable <span class="arithmatex">\(nB\)</span>. Taking the ratio between the measured band radiance and the hypothetical methane-free radiance removes the first order dependence on the values of the parameters.</p>
+<div class="arithmatex">\[
+nB = \frac{I^{b}}{I^{b}_{0}}
+     =\int \widehat n^{b}_{\lambda}\;
+       \exp\!\Bigl[-\!\int_0^{\infty}
+            k^{(\Delta CH_4)}_{\lambda}(s')\,ds'\Bigr] d\lambda .
+\]</div>
+<p>, where <span class="arithmatex">\(k^{(\Delta CH_4)}_{\lambda}(s')\)</span> is the aggregate volume absorption coefficient in the hypothetical methane free scenario. <span class="arithmatex">\(\widehat n^{b}_{\lambda}\)</span> defined as below</p>
+<p>$$
+\widehat n^{b}<em>{\lambda}
+   =\frac{f^{b}</em>{\lambda}\,I_\lambda^{\text{sun}}\,r_\lambda\alpha_\lambda
+          \exp[-!\int k^0_\lambda ds']}
+         {\int f^{b}<em>{\lambda'}\,I</em>{\lambda'}^{\text{sun}}\,r_{\lambda'}\alpha_{\lambda'}
+          \exp[-!\int k^0_{\lambda'} ds']\,d\lambda'} .
+$$
+Because the same unknowns appear in numerator and denominator, the ratio <span class="arithmatex">\(nB\)</span> is first-order insensitive to errors in surface albedo, aerosol optical depth, and background gas profiles. <span class="arithmatex">\(\widehat n^{b}_{\lambda}\)</span> functions as a wavelength-dependent weighting mask that tells us which parts of the methane absorption spectrum dominate the band signal.</p>
+<h3 id="so-what-is-lightweight-about-your-calculation">So what is lightweight about your calculation?</h3>
+<p>A formal error budget showed that one of the dominant uncertainties (20%) in full multilayer radiative transfer model of the differential signal comes from the ignorance of surface reflectance spectrum, not from the fine details of atmospheric propagation. This is fundamentally very difficult to know a priori. By accepting that there exist an error floor and simplifying everything that contributes less than it, we cut runtime by <em>two orders of magnitude</em> while keeping total retrieval error within the same 20% envelope.</p>
+<p>Making these simplifications, we treat the entire atmosphere as a single slab at 300 K and 1 bar. Absorptivities for CH₄, CO₂, H₂O, and the other relevant gases are taken from the HITRAN database at those conditions, while the background column densities follow the U.S. Standard Atmosphere (1976) scaled to present-day values (about 421 ppm CO₂ and 1900 ppb CH₄).</p>
+<p>Because the model uses a single slab, the altitude dependence of the absorption coefficients is ignored; the same coefficients act uniformly from the surface to the top of the atmosphere, so no layer-by-layer integration is required.</p>
+<p>We also omit explicit treatment of surface albedo and the slow aerosol spectral slope. Both vary only gently across the SWIR methane windows and together dominate the irreducible 20% uncertainty that already limits the retrieval. Their combined effect is carried as a fixed term in the error budget.</p>
+<p>Finally, the global filter functions <span class="arithmatex">\(\\widehat n^{b}\_{\\lambda}\)</span> are pre-computed offline and stored with the code, so a run-time evaluation reduces to a quick dot product plus a lookup in the methane cross-section table.</p>
+<p>If future work reduces the albedo uncertainty, the framework lets you dial the radiative transfer fidelity back up and reclaim those accuracy gains</p>
+<h3 id="how-do-we-impute-the-data-into-the-synthetic-data">How do we impute the data into the synthetic data?</h3>
+<p>To inject synthetic methane plumes into a scene we proceed as follows. First, we generate a lookup table that gives the global-filter factor <span class="arithmatex">\(nB\)</span> for each band as a function of the excess methane column <span class="arithmatex">\(\\Delta X\_{CH\_4}\)</span> value to build an n-dimensional array of attenuation factors - our “plume-normalised brightness” data cube. Finally, we obtain the synthetic-plume radiance cube simply by multiplying this attenuation cube element-wise with the original radiance cube of the methane-free scene. This is visualised in the diagram below.</p>
+<h3 id="_1"><img alt="image6" src="images/image19.png" /></h3>
+<h3 id="_2"></h3>
+<h3 id="_3"></h3></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="javascripts/mathjax.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

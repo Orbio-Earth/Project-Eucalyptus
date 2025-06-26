@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Model - Project Eucalyptus 🌿</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Project Eucalyptus 🌿</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link">Introduction</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Data.html" class="nav-link">Data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Radiative_Transfer.html" class="nav-link">Radiative transfer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Model.html" class="nav-link active" aria-current="page">Model</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Validation.html" class="nav-link">Validation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Postprocessing.html" class="nav-link">Postprocessing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Landsat.html" class="nav-link">Landsat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Hyperspectral.html" class="nav-link">Hyperspectral</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="Radiative_Transfer.html" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="Validation.html" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/Orbio-Earth/Project-Eucalyptus" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#model" class="nav-link">Model</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#references" class="nav-link">References</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="model">Model</h1>
+<h3 id="what-is-the-loss-function-used-for-training">What is the loss function used for training?</h3>
+<p>We use a custom loss function, which is a weighted sum of a binary cross-entropy and a mean squared error loss function. Each loss function is applied to a separate output channel of the neural network, so in that sense our methane detection model is a multi-task model.</p>
+<p>The binary cross-entropy is obtained by thresholding the labels – pixels with a fractional reduction y<em>ᵢ</em> in the B12/B11 ratio that exceed the <code>binary_threshold</code> hyperparameter (set to 0.001) are encoded as 1's, and those below as 0's.</p>
+<div class="arithmatex">\[
+b_i = \begin{cases} 1 &amp; \text{if }|y_i| &gt; T_{binary} \\ 0 &amp; \text{if } |y_i| \le T_{binary} \end{cases}
+\]</div>
+<div class="arithmatex">\[
+\mathcal{L}_{BCE} = -  \sum_{i=1}^{N} \left[ b_i \log(\hat{p}_i) + (1 - b_i) \log(1 - \hat{p}_i) \right]
+\]</div>
+<p>The mean squared error loss is calculated only on pixels that exceed the <code>binary_threshold</code>hyperparameter, and it is weighted by the <code>MSE_multiplier</code> hyperparameter.</p>
+<div class="arithmatex">\[
+\mathcal{L}_{MSE} = \sum_{i=1}^{N} b_i (y_i - \hat{\mu}_i)^2
+\]</div>
+<div class="arithmatex">\[
+\mathcal{L} = \mathcal{L}_{BCE} +W_{MSE}  \cdot \mathcal{L}_{MSE}
+\]</div>
+<h3 id="how-should-the-model-output-be-interpreted">How should the model output be interpreted?</h3>
+<p>The U-net outputs two channels that together give a probabilistic prediction of methane.</p>
+<p>The first is a segmentation channel which gives a binary prediction of the presence or absence of methane in each pixel. Presence is defined as the fractional reduction in the B12/B11 band ratio exceeding the <code>binary_threshold</code> value (0.001). Pass this channel through a sigmoid (inverse logistic) function to obtain a probability between 0 and 1. This is the model's internal predictive probability of methane, but it should be used with caution, as it is calibrated on the training data, which contains many more methane plumes than would be encountered "in the wild". Changing the chip size (from 128x128 to 256x256) or the number or sizes of plumes inserted in each chip results in different output probabilities.</p>
+<p>The second is a regression channel which gives a conditional prediction of the quantity of methane present in each pixel. In other words, it answers the question "if there is methane in this pixel, then how much?" The metric is the fractional change in the B12/B11 band ratio (frac), and still needs to be post-processed to obtain a gas concentration in mol/m². The loss function on the conditional channel only applies to pixels that contain methane, so outside of these areas, the model is free to conjure up possible methane plumes "just in case." The conditional channel on its own therefore tends to be noisy.</p>
+<p>A "marginal" prediction can be obtained by multiplying the binary probability and the conditional prediction. This can be used like the output of a pixelwise regression model, as a point prediction of the quantity of methane in each pixel. But again, it is calibrated to the training data, and so should be interpreted cautiously.</p>
+<p>A probabilistic interpretation that combines the two predictive channels is that the prediction for each pixel is modelled as a <a href="https://en.wikipedia.org/wiki/Zero-inflated_model">zero-inflated</a> Gaussian distribution. The loss function is the likelihood of this distribution, and the optimizer's task is to maximize this likelihood. In this perspective, the <code>MSE_multiplier</code> parameter controls the σ parameter of the predictive Gaussian distribution. It is inversely proportional to the variance. Since frac values are small, informally this explains why <code>MSE_multiplier</code> needs to be high for the two loss components to be in tune with each other. The marginal prediction is the expected value of the zero-inflated distribution.</p>
+<h3 id="why-isnt-the-model-just-a-semantic-segmentation-why-isnt-the-model-just-a-pixelwise-regression">Why isn't the model just a semantic segmentation? Why isn't the model just a pixelwise regression?</h3>
+<p>A semantic segmentation model (pixelwise binary classification) is insufficient to be able to report methane emissions from assets, as it only indicates the presence of a plume, but not its concentration. In order to quantify the emissions, one would have to use the segmentation output as a mask for a separately retrieved methane concentration map. This can be a successful strategy, for example Rouet-Leduc and Hulbert (2024) train a pixel classifier which they use to mask the Varon et al. (2021) "classical" retrievals, and thus reduce false positives.</p>
+<p>We did not follow this strategy, as we found the classical retrievals to be noisy, sometimes even reporting negative methane concentrations on pixels classified as methane. We chose to leverage the power of neural networks for high-quality retrievals as well as masking.</p>
+<p>A pixelwise regression model (where the neural network predicts the quantity of methane or frac in each pixel) could also be trained for this problem. The main issue here is that the ground truth is very sparse (most pixels don't contain methane), and so with a mean squared error loss most predictions are strongly regularized towards zero. Sometimes during model training the weights would even collapse to always predicting zero everywhere. We could only counter-balance this somewhat by giving higher weight to methane pixels, but this introduced an additional hyperparameter that is difficult to tune.</p>
+<p>We therefore chose the multi-task approach (two-part loss) which gives the best of both worlds – separating mask and retrieval outputs with a neat probabilistic interpretation, and adapting well to the sparseness of the ground truth data.</p>
+<h3 id="is-class-imbalance-a-problem">Is class imbalance a problem?</h3>
+<p>Though we often worried about class imbalance (most pixels do not contain methane), we found that the binary cross-entropy loss handled it well, and the trained models did not simply predict no methane everywhere. Experiments with using focal loss – which is designed to cope better with class imbalance –  yielded much worse results.</p>
+<h3 id="does-the-model-ever-infer-negative-methane-concentrations">Does the model ever infer negative methane concentrations?</h3>
+<p>Yes, this can happen, as the conditional prediction is unconstrained. Some (but not all) trained models predict negative methane in areas where it is quite sure there is no methane. Even though this is physically impossible, there is no penalty in the loss function for outputting a negative prediction on methane-free pixels.</p>
+<p>If desired, it would be quite simple to constrain the model to only predict positive methane, by passing the conditional prediction layer through a sigmoid function before applying the masked mean squared error function. We have not tried this, as we found the unconstrained conditional predictions to generally behave well: we do not see significant negative concentrations in the marginal predictions.</p>
+<h3 id="what-model-architecture-are-you-using">What model architecture are you using?</h3>
+<p>We are using an U-Net++ (Zhou et al. 2018) with an efficientnet-b4 (Tan, Le, 2019) encoder starting with “noisy-student” pretrained weights. Using the <a href="https://github.com/qubvel-org/segmentation_models.pytorch">Segmentation Models</a> Python package this model can be initialized with</p>
+<pre><code class="language-python">import segmentation_models_pytorch as smp
+
+model = smp.UnetPlusPlus(
+    encoder_name=&quot;timm-efficientnet-b4&quot;,
+    encoder_weights=&quot;noisy-student&quot;,
+    in_channels=...,
+    classes=...
+)
+</code></pre>
+<h3 id="have-you-tried-any-other-model-architectures">Have you tried any other model architectures?</h3>
+<p>We saw a large improvement going from an U-Net (Ronneberger et al. 2015) with a ResNet-50 (He et al. 2016) encoder to an U-Net++ (Zhou et al. 2018) with an efficientnet-b4 (Tan, Le, 2019). Larger encoders, i.e. going from efficientnet-b1 to b2 to b3 to b4 gave us small, but significant improvements.</p>
+<h3 id="how-do-you-train-the-model">How do you train the model?</h3>
+<p>The training loop (code <a href="https://github.com/Orbio-Earth/Eucalyptus-code-archive/blob/main/methane-cv/src/training/training_script.py">here</a>) is fairly standard with some special design decisions.</p>
+<p>We typically trained with 4 GPUs using distributed training on Azure ML. We use the optimizer AdamW with no weight decay and a batch size schedule (Smith et al. 2017), where the batch size is gradually increased over the first 30 warmup epochs from 16 to 160.</p>
+<p>Unlike most computer vision applications, because we can generate arbitrarily large synthetic datasets, using augmentations to juice as much information as possible out of every sample is not essential. So we only use simple non-destructive augmentations: random rotations by multiples of 90°, and random flips.</p>
+<p>In earlier model training, we also implemented and used a signal modulation transformation that weakens the methane concentration by a random constant factor in each chip. We found that presenting the model with stronger plumes in early epochs, and gradually reducing them in later epochs, helped guide the optimizer. In more recent training runs, we noticed that the modulation was no longer needed to get good results.</p>
+<p>Validation metrics are calculated on three pre-selected areas (see <a href="Validation.html#why-have-you-selected-these-three-specific-regions-to-validate-in">Why have you selected these three specific regions to validate in?</a>) and training is only stopped if the validation metrics are not improving for multiple epochs (Early Stopping with patience of X).</p>
+<p>As the main validation metric for Early Stopping, we selected average Recall over multiple emission buckets and averaged over the three regions. Recall is calculated using a classification threshold that allows for 10 false positive pixels on average over all 128x128 validation crops. A model checkpoint is saved if the mean recall improves. Balancing False Positives and Recall allows us to select the model that offers the highest sensitivity (i.e. best detection accuracy) without exceeding our target noise tolerance. See <a href="https://github.com/Orbio-Earth/methane-cv/blob/main/src/training/training_script.py#L1378">here</a> for the implementation of validation and <a href="Validation.html#what-metrics-do-you-use-during-model-training">here</a> for more details and validation metric visuals..</p>
+<h3 id="how-long-does-it-take-to-train-the-model">How long does it take to train the model?</h3>
+<p>Around 15 hours depending on some randomness in the Early Stopping criteria. We have been using the Azure VM <em>Standard_NC64as_T4_v3</em> (64 cores, 440 GB RAM, 2816 GB disk) with <a href="https://www.nvidia.com/en-us/data-center/tesla-t4/">4 x NVIDIA Tesla T4</a> GPUs. Our typical throughput is in the 550-600 chips/second (a chip is a single data item) range during training, and over 2,000 chips/second during validation (where gradients do not need to be computed). By modern standards, these are not particularly powerful GPUs, but we find that because of the large number of bands, more powerful GPUs would not be used efficiently and the training quickly becomes IO-bound.</p>
+<h3 id="have-you-tried-using-foundation-models">Have you tried using foundation models?</h3>
+<p>Yes, we ran some experiments with pretrained weights from popular foundation models trained on generic computer vision tasks for Sentinel 2 data. We did not see any measurable improvement in model performance from those. Our informal interpretation is that the methane signal in bands 11 and 12 is very subtle, and its detection quite orthogonal to more typical computer vision tasks on satellite imagery, such as object detection, change detection and land cover classification.</p>
+<h3 id="what-experiments-did-not-work">What experiments did not work?</h3>
+<p>We have found the performance to be not affected by the exact number of synthetic plumes we are inserting into training chips. Our default was to insert a random number of between 0-5 plumes into each chip, but we have seen similar results using 0-2, 0-3 and 0-4. Only 0-1 showed significantly worse results as now we seem to show too little plumes.</p>
+<p>Also, at our current dataset size of around 1.5 million 128x128 chips, we have found the dataset size to not have an impact anymore on performance. There are large gains from going from 0.1 million to 0.75 million, but doubling the size again to 1.5 million yields no significant gains.</p>
+<p>We tried using larger chips, going from 128x128 to 256x256 following the intuition that having more context and less border pixels could help the model in learning better. To our surprise, we got worse results. Also, using the same 256x256 chips, we tried using random crops of 224x224, 192x192 and 160x160 as another data augmentation technique. This did not work as well, the best results were achieved giving the full size chips.</p>
+<h3 id="what-are-some-of-the-main-limitations-of-these-models">What are some of the main limitations of these models?</h3>
+<p>Despite significant strides in model performance over the last year, the primary limitation of the Sentinel 2 computer vision model remains false positives. Large methane plumes detectable by Sentinel 2 are relatively rare events, and so even a small rate of false positives can easily overwhelm the true detections. For this reason, we find that we continue to need careful quality assurance (QA) of candidate plumes in production.</p>
+<p>In recent models trained on simulated plumes, we observed that the model would sometimes create false positives with very realistic-looking plume morphologies. Our interpretation is that a model that leverages morphological information also risks being prone to hallucinating more realistic plumes. These are therefore difficult to invalidate in QA. For this reason, we do not use these models in our production setting.</p>
+<p>Just like the classical retrieval algorithms, our computer vision model relies heavily on reference scenes to infer the presence of methane on a target date. This works well when a scene is stable (such as in deserts), but breaks down if a scene changes rapidly (vegetation, agriculture, or large changes in soil moisture). In the classical algorithms, such changes cause false positives, whereas with computer vision they tend to raise the detection threshold. Another subtle consequence is that persistent sources can sometimes be erased if methane is present in one of the reference scenes, especially if the wind direction does not change between overpasses. We observed this in single blind release studies, where we found we needed to manually select alternative reference scenes to recover certain plumes.</p>
+<h3 id="what-are-the-most-important-next-steps">What are the most important next steps?</h3>
+<h4 id="reference-chip-selection">Reference chip selection</h4>
+<p>Our current <a href="Data.html#how-do-you-select-reference-scenes">method</a> to select two reference scenes only uses a cloud masking threshold and proximity in time. When we examine scenes with known methane emissions, we find that plumes that are missed (false negatives) by the computer vision inference can be revealed with a manual selection of alternative reference scenes. This can happen if the source also emitted methane during one of the reference overpasses, which erases the methane signal on the target date. It can also happen if scenes further in the past are better references than more recent ones, for example in terms of soil moisture conditions. We therefore expect this to be fertile ground for model improvements, including ideas such as:</p>
+<ul>
+<li>feature engineering reference scenes, like taking averages of the last 5/10 overpasses;</li>
+<li>selecting the reference scenes by some similarity metric to the target date;</li>
+<li>allowing the model to choose its own reference scenes by some attention mechanism.</li>
+</ul>
+<h4 id="hyperparameter-tuning-for-simulated-plumes">Hyperparameter tuning for simulated plumes</h4>
+<p>There are many decisions that need to be made when it comes to synthetic data generation with simulated plumes, including multiple hyperparameters that we have observed to be important to model performance, but have not yet systematically tuned. These are:</p>
+<ul>
+<li>the distributions of emission sizes in the training data,</li>
+<li>the diffusion and turbulence parameters of the <a href="Data.html#how-do-you-simulate-methane-plumes">Gaussian plume models</a></li>
+<li>the distribution of the number of plumes to include in each chip (we currently sample uniformly from 0 to 5 for each chip)</li>
+</ul>
+<p>The development cycle for these parameters is long, as it includes plume simulations, synthetic data generation, model training and validation. But there may well significant detection performance improvements available if pursued.</p>
+<h2 id="references">References</h2>
+<p>He, K., Zhang, X., Ren, S., &amp; Sun, J. (2016). Deep residual learning for image recognition. In <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em> (pp. 770-778).</p>
+<p>Ronneberger, Olaf, Philipp Fischer, and Thomas Brox. "U-net: Convolutional networks for biomedical image segmentation." In <em>Medical image computing and computer-assisted intervention–MICCAI 2015: 18th international conference, Munich, Germany, October 5-9, 2015, proceedings, part III 18</em>, pp. 234-241. Springer international publishing, 2015.</p>
+<p>Rouet-Leduc, Bertrand, and Claudia Hulbert. "Automatic detection of methane emissions in multispectral satellite imagery using a vision transformer." <em>Nature Communications</em> 15, no. 1 (2024): 3801.</p>
+<p>Smith, S. L., Kindermans, P. J., Ying, C., &amp; Le, Q. V. (2017). Don't decay the learning rate, increase the batch size. <em>arXiv preprint arXiv:1711.00489</em>.</p>
+<p>Tan, M., &amp; Le, Q. (2019, May). Efficientnet: Rethinking model scaling for convolutional neural networks. In <em>International conference on machine learning</em> (pp. 6105-6114). PMLR.</p>
+<p>Varon, Daniel J., Dylan Jervis, Jason McKeever, Ian Spence, David Gains, and Daniel J. Jacob. "High-frequency monitoring of anomalous methane point sources with multispectral Sentinel-2 satellite observations." <em>Atmospheric Measurement Techniques</em> 14, no. 4 (2021).</p>
+<p>Zhou, Z., Rahman Siddiquee, M. M., Tajbakhsh, N., &amp; Liang, J. (2018). Unet++: A nested u-net architecture for medical image segmentation. In <em>Deep learning in medical image analysis and multimodal learning for clinical decision support: 4th international workshop, DLMIA 2018, and 8th international workshop, ML-CDS 2018, held in conjunction with MICCAI 2018, Granada, Spain, September 20, 2018, proceedings 4 (pp. 3-11)</em>. Springer International Publishing.</p>
+<h1 id="_1"></h1></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="javascripts/mathjax.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

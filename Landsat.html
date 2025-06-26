@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Landsat - Project Eucalyptus 🌿</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Project Eucalyptus 🌿</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link">Introduction</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Data.html" class="nav-link">Data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Radiative_Transfer.html" class="nav-link">Radiative transfer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Model.html" class="nav-link">Model</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Validation.html" class="nav-link">Validation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Postprocessing.html" class="nav-link">Postprocessing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Landsat.html" class="nav-link active" aria-current="page">Landsat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Hyperspectral.html" class="nav-link">Hyperspectral</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="Postprocessing.html" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="Hyperspectral.html" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/Orbio-Earth/Project-Eucalyptus" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#landsat" class="nav-link">Landsat</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="landsat">Landsat</h1>
+<h3 id="can-you-apply-the-sentinel-2-model-without-retraining-on-landsat-data">Can you apply the Sentinel-2 model without retraining on Landsat data?</h3>
+<p>Yes — we’ve experimented with applying our Sentinel-2 model directly to Landsat imagery using the same <a href="Data.html#how-do-you-simulate-methane-plumes">simulated plume insertion</a> and <a href="Data.html#what-is-the-input-to-the-neural-network">frac prediction approach</a>. However, the results were suboptimal. While it <em>technically</em> works, the performance drops due to differences in resolution, sensor characteristics, and spectral coverage between Sentinel-2 and Landsat.</p>
+<p>To address this, we trained a dedicated model on Landsat data using the same methodology. This led to significantly better performance.</p>
+<h3 id="what-are-the-results-of-your-best-landsat-model">What are the results of your best Landsat model?</h3>
+<p>Below are the detection threshold results for the Landsat model (corresponding to an average FPR of around 1.3 plumes per 352×352 tile—area-equivalent to 500×500 px tiles in Sentinel-2):</p>
+<p><img alt="image17" src="images/image9.png" /></p>
+<p><strong>Hassi (Algeria)</strong></p>
+<ul>
+<li>We detect emissions of 177 kg/hr in 10% of cases</li>
+<li>50% DT: 481 kg/hr</li>
+<li>90% DT: 2287 kg/hr</li>
+</ul>
+<p><strong>Permian (USA)</strong></p>
+<ul>
+<li>10% DT:  552 kg/hr</li>
+<li>50% DT: 1835 kg/hr</li>
+<li>90% DT: 10,350 kg/hr</li>
+</ul>
+<p><strong>Marcellus (USA)</strong></p>
+<ul>
+<li>10% DT: 2064 kg/hr</li>
+<li>50% DT: 8583 kg/hr</li>
+<li>90% DT: &gt;25000 kg/hr</li>
+</ul>
+<p>Interestingly, the Landsat model achieves <strong>better 10% and 50% detection thresholds</strong> than our <a href="Validation.html#what-are-the-results-of-your-best-model">current Sentinel-2 model</a>, though <strong>90% thresholds are worse</strong>—likely due to differences in signal-to-noise characteristics and scene variability.</p>
+<p>This result highlights the value of training sensor-specific models, rather than relying on direct transfer from one platform to another.</p>
+<h3 id="what-are-the-differences-between-the-approach-used-for-sentinel-2-and-landsat">What are the differences between the approach used for Sentinel-2 and Landsat?</h3>
+<p>The main difference lies in how the data is generated and ingested. Landsat and Sentinel-2 differ in spatial resolution, tiling format, and metadata structure, which impacts how we process and align scenes for methane detection.</p>
+<h4 id="sensor-coverage-and-temporal-depth">Sensor Coverage and Temporal Depth</h4>
+<p>We use only Landsat 8 and 9 because they are the two active missions still collecting data, which makes them suitable for real-time methane monitoring. Landsat 8 also gives us a longer history, with data available since 2013—earlier than Sentinel-2, which started in 2016.</p>
+<h4 id="spatial-resolution">Spatial Resolution</h4>
+<p><strong>Sentinel-2</strong> has 20m resolution, <strong>Landsat</strong> has 30m (in the relevant methane absorbing bands).</p>
+<h4 id="tiling-alignment">Tiling Alignment</h4>
+<ul>
+<li><strong>Sentinel-2</strong> is naturally organized in fixed <strong>MGRS tiles</strong> (100 km × 100 km), which makes spatial alignment straightforward and consistent across time.</li>
+<li><strong>Landsat</strong> images are delivered as <strong>WRS-2 path/row scenes</strong>, which are not aligned to a fixed grid. This introduces spatial variability across acquisitions and makes it harder to stack and compare scenes directly.</li>
+</ul>
+<p>To address this, we implemented a <strong>fixed internal tile grid</strong> for Landsat (e.g. 384×384 pixel tiles) and reprojected each Landsat acquisition to this grid, enabling consistent spatial alignment across time and scenes.</p>
+<h4 id="reference-scenes-alignment">Reference Scenes Alignment</h4>
+<p>Creating a time series stack of reference scenes for Sentinel-2 is straightforward— the scenes are already orthorectified, snapped to a global UTM-based grid (MGRS), and aligned at the pixel level. Each scene is delivered in a consistent spatial reference system, so time steps are co-registered by default. That means we can compare across dates directly, without worrying about reprojection artifacts or pixel shifts.</p>
+<p>Landsat, on the other hand, follows the WRS-2 path/row system. Each scene covers a full swath and isn’t aligned to a consistent global tiling grid. Even though the data is orthorectified, there’s no guarantee that pixels line up across dates. So for Landsat, we have to reproject all reference scenes to the grid of the main (target) scene to do a time series analysis.</p>
+<h4 id="cloud-masking">Cloud Masking</h4>
+<p>For Sentinel-2, we use an external model (<strong>OmniCloud</strong>) to generate high-quality cloud masks. For Landsat, we found the native QA_PIXEL band sufficient to exclude invalid pixels (cloud, shadow, etc).</p>
+<h1 id="_1"></h1></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="javascripts/mathjax.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
